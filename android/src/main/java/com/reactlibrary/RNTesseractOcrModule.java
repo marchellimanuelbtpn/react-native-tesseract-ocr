@@ -191,7 +191,7 @@ public class RNTesseractOcrModule extends ReactContextBaseJavaModule {
 			}
 		}
 
-		tessBaseApi.init(DATA_PATH, getConstants().get(lang).toString());
+		tessBaseApi.init(DATA_PATH, getConstants().get(lang).toString(), TessBaseAPI.OEM_TESSERACT_CUBE_COMBINED);
 
 		if (tessOptions != null) {
 
@@ -209,6 +209,9 @@ public class RNTesseractOcrModule extends ReactContextBaseJavaModule {
 				tessBaseApi.setVariable(TessBaseAPI.VAR_CHAR_BLACKLIST, tessOptions.getString("blacklist"));
 			}
 		}
+
+		tessBaseApi.setPageSegMode(TessBaseAPI.PageSegMode.PSM_SPARSE_TEXT);
+		tessBaseApi.setDebug(true);
 
 		Log.d(REACT_CLASS, "Training file loaded");
 
